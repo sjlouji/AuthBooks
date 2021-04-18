@@ -1,0 +1,31 @@
+{
+  "name": "authbooks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:auth": "npx nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "books-constants": "file:packages/constants",
+    "books-schema": "file:packages/schemas",
+    "config": "file:packages/config",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "history": "^5.0.0",
+    "log-timestamp": "^0.3.0",
+    "mongoose": "^5.12.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0"
+  }
+}
