@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 let genPasswordResetToken = user => {
     return jwt.sign({
         iss: 'Joan_Louji',
-        sub: user.id,
+        sub: user._id,
         iat: new Date().getTime(),
         exp: Math.floor(Date.now() / 1000) + (60*2)
     }, envConfig.JWT_SECRET.resetToken);

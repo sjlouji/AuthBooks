@@ -123,6 +123,25 @@ const blackListError = {
     }
 }
 
+const configError = {
+    CONF01: {
+        message: 'User is not admin',
+        code: 'CONF01'
+    },
+    CONF02: {
+        message: 'User is not super admin',
+        code: 'CONF02'
+    },
+    CONF03: {
+        message: 'Config for the user already exists',
+        code: 'CONF03'
+    },
+    CONF04: {
+        message: 'Unauthorized',
+        code: 'CONF04'
+    }
+}
+
 const serverError = {
     SER01: {
         message: 'Try again later',
@@ -133,5 +152,6 @@ const serverError = {
 module.exports = {
     authError,
     serverError,
-    blackListError
+    blackListError,
+    configError
 }
