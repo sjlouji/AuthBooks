@@ -139,6 +139,18 @@ const configError = {
     CONF04: {
         message: 'Unauthorized',
         code: 'CONF04'
+    },
+    CONF05: {
+        message: 'Enter target user Id',
+        code: 'CONF05'
+    },
+    CONF06: {
+        message: 'Unable to find the config for the User',
+        code: 'CONF06'
+    },
+    CONF07: {
+        message: 'Config type not found',
+        code: 'CONF07'
     }
 }
 

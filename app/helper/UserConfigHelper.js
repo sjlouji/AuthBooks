@@ -13,6 +13,12 @@ class UserConfigHelper {
             names: data
         }
     }
+
+    static getConfigTypeCode(data) {
+        if(data.code.toUpperCase() === 'CONFIG') return 'userConfig';
+        if(data.code.toUpperCase() === 'BLACKLIST') return 'blackList';
+        return null;
+    }
 }
 
 module.exports = UserConfigHelper;
