@@ -9,6 +9,9 @@ const getToken = require('../../middleware/jwt/getToken')
 const genPasswordResetToken =require('../../middleware/jwt/getResetPasswordToken')
 const envConfig = require('config')
 const jwt = require('jsonwebtoken');
+const welcomeEmail = require('../../middleware/mail/welcome');
+const resetSuccess = require('../../middleware/mail/resetsuccess');
+const forgotPassword = require('../../middleware/mail/forgotpassword');
 
 class AuthController {
     static async passportLogin(req,res, next) {
@@ -96,6 +99,8 @@ class AuthController {
         const token = getToken(signup)
         constructResponse = AuthHelper.constructRegisterResponse({token, user: signup});
         console.log(`[Passport Register Success]: ${JSON.stringify(constructResponse)}`)
+        // Sends email to the client
+        welcomeEmail({email: signup.email, first_name: signup.first_name}) 
         return res.status(httpResponse.HTTP_OK).json(constructResponse);
     }
 
@@ -141,6 +146,8 @@ class AuthController {
         }
         constructResponse = AuthHelper.constructErrorResponse(resetUrl);
         console.log(`[Passport ForgotPassword Success]: ${JSON.stringify(constructResponse)}`)
+        // Sends email to the client
+        forgotPassword({email: email, first_name: user.first_name}, resetUrl)
         return res.status(httpResponse.HTTP_OK).json(constructResponse);
     }
 
@@ -193,6 +200,8 @@ class AuthController {
         // Construct Response
         constructResponse = AuthHelper.constructResetPasswordResponse();
         console.log(`[Passport ResetPassword Success]: ${JSON.stringify(constructResponse)}`)
+        // Sends email to the client
+        resetSuccess(user.first_name, user.email)
         return res.status(httpResponse.HTTP_OK).json(constructResponse);
     }
 
