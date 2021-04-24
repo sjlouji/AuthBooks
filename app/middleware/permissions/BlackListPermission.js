@@ -8,22 +8,34 @@ class BlackListPermission {
         const { user } = req;
         const insertPermissions = await UserConfigDataModel.getBlacklistPermission(user);
         if(insertPermissions.can_add) return next()
-        return res.status(401).json(UserConfigHelper.constructErrorResponse(configError.CONF04, null, httpResponse.HTTP_UNAUTHORIZED))
+        return res.status(401).json(UserConfigHelper
+            .constructErrorResponse(configError.CONF04, null, httpResponse.HTTP_UNAUTHORIZED))
     }
     
     static async edit(req, res, next){
-        console.log(req)
+        const { user } = req;
+        const insertPermissions = await UserConfigDataModel.getBlacklistPermission(user);
+        console.log(insertPermissions)
+        if(insertPermissions.can_edit) return next()
+        return res.status(401).json(UserConfigHelper
+            .constructErrorResponse(configError.CONF04, null, httpResponse.HTTP_UNAUTHORIZED))
     }
     
     static async remove(req, res, next){
-        console.log(req)
+        const { user } = req;
+        const insertPermissions = await UserConfigDataModel.getBlacklistPermission(user);
+        console.log(insertPermissions)
+        if(insertPermissions.can_delete) return next()
+        return res.status(401).json(UserConfigHelper
+            .constructErrorResponse(configError.CONF04, null, httpResponse.HTTP_UNAUTHORIZED))
     }
     
     static async view(req, res, next){
         const { user } = req;
         const insertPermissions = await UserConfigDataModel.getBlacklistPermission(user);
         if(insertPermissions.can_view) return next()
-        return res.status(401).json(UserConfigHelper.constructErrorResponse(configError.CONF04, null, httpResponse.HTTP_UNAUTHORIZED))
+        return res.status(401).json(UserConfigHelper
+            .constructErrorResponse(configError.CONF04, null, httpResponse.HTTP_UNAUTHORIZED))
     }
     
 }
