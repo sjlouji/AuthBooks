@@ -6,7 +6,7 @@ const { Model } = mongoose;
 
 class UserConfigDataModel {
     static async findClientConfigById(user) {
-        return UserConfig.findOne({user_id: ObjectId(user._id)});
+        return await UserConfig.findOne({user_id: ObjectId(user._id)});
     }
 
     static async getBlacklistPermission(user) {
@@ -14,6 +14,18 @@ class UserConfigDataModel {
         const getUserId = await UserConfig.findOne({user_id: ObjectId(id)});
         const permissions = getUserId.blackList;
         return permissions;
+    }
+
+    static async updateUserConfig(configType, data, user, config) {
+        return UserConfig.findOneAndUpdate(
+            {_id: config._id},
+            {[configType]: {
+                can_view: data.config.view,
+                can_edit: data.config.edit,
+                can_delete: data.config.remove,
+                can_add: data.config.add,
+            }}, {upsert: true, returnOriginal: false},
+        );
     }
 
     static async defaultAdminPermissions(isAdmin, user) {

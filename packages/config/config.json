@@ -6,7 +6,7 @@
     "mongo": {
         "BOOKSDATABASEURL": "mongodb://localhost/db_books_auth"
     },
-    "SENDGRIDKEY": "****",
+    "SENDGRIDKEY": "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",
     "JWT_SECRET": {
         "authToken": "Quick_books_auth_key_for_security_reasons",
         "resetToken": "reset_token_for_reset_token_security_reasons"
