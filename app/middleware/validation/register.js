@@ -1,6 +1,6 @@
 const { passwordPolicy } = require('../../middleware/policy/adminPassword')
 const { adminUsernamePolicy } = require('../../middleware/policy/adminUsername')
-const { authError } = require('books-constants')
+const { authError, serverError } = require('books-constants')
 const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
 async function registerValidation(req){
@@ -8,6 +8,8 @@ async function registerValidation(req){
     const { email, password, firstName, lastName } = req;
     const checkPasswordPolicy = passwordPolicy(req)
     const checkUserNamePolicy = await adminUsernamePolicy(req)
+    const validatePayload = validatePayloadKeys(req)
+    if(!validatePayload) error.push(constructErrorObject(serverError.SER02))
     if(!firstName) error.push(constructErrorObject(authError.AUTH07));
     if(!lastName) error.push(constructErrorObject(authError.AUTH08));
     if (!email) error.push(constructErrorObject(authError.AUTH01));
@@ -20,6 +22,13 @@ async function registerValidation(req){
         checkPasswordPolicy.map(el => {return error.push(el)})
     }
     return error;
+}
+
+function validatePayloadKeys(data) {
+    const allowed = ['email', 'password', 'firstName', 'lastName'];
+    const payload = Object.keys(data);
+    if(!allowed.equals(payload)) return false
+    return true;
 }
 
 function constructErrorObject(error) {

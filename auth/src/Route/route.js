@@ -1,0 +1,30 @@
+import React, {lazy} from 'react';
+import LoginPage from '../Pages/Auth/Login/LoginPage';
+import RegisterPage from '../Pages/Auth/Register/RegisterPage';
+import RequestPassword from '../Pages/Auth/ResetPassword/RequestPassword';
+import ResetPassword from '../Pages/Auth/ResetPassword/ResetPassword';
+
+const routes = [
+  {
+    path: '/auth/login',
+    exact: true,
+    component: () => <LoginPage />
+  },
+  {
+    path: '/auth/register',
+    exact: true,
+    component: () => <RegisterPage />
+  },
+  {
+    path: '/auth/reset',
+    exact: true,
+    component: () => <RequestPassword />
+  },
+  {
+    path: '/auth/reset/:token',
+    exact: true,
+    component: () => <ResetPassword />
+  }
+];
+
+export default routes;

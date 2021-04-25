@@ -34,7 +34,7 @@ const authError = {
     AUTH06: {
         message: 'Invalid Password',
         code: 'AUTH06',
-        type: fieldType.EMAIL
+        type: fieldType.PASSWORD
     },
     AUTH07: {
         message: 'First Name is required',
@@ -97,7 +97,7 @@ const authError = {
     AUTH19: {
         message: 'Token expired',
         code: 'AUTH19'
-    },
+    }
 }
 
 const blackListError = {
@@ -158,6 +158,10 @@ const serverError = {
     SER01: {
         message: 'Try again later',
         code: 'SER01',
+    },
+    SER02: {
+        message: 'Invalid key passed',
+        code: 'SER02'
     }
 }
 

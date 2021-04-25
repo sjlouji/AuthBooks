@@ -1,0 +1,65 @@
+Arguments: 
+  /Users/joan/.nvm/versions/node/v10.10.0/bin/node /usr/local/Cellar/yarn/1.22.10/libexec/bin/yarn.js start:frontend
+
+PATH: 
+  /Users/joan/.nvm/versions/node/v10.10.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  10.10.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/joan/Documents/Louji/Project/Books/AuthBook/package.json: Unexpected token } in JSON at position 199
+      at JSON.parse (<anonymous>)
+      at /usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:310:30)
+      at /usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "authbooks",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start:auth": "npx nodemon index.js",
+      "start:frontend": "cd frontend && npm start",
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "@material-ui/core": "^4.11.3",
+      "@material-ui/icons": "^4.11.2",
+      "axios": "^0.21.1",
+      "bcryptjs": "^2.4.3",
+      "body-parser": "^1.19.0",
+      "books-constants": "file:packages/constants",
+      "books-schema": "file:packages/schemas",
+      "config": "file:packages/config",
+      "cors": "^2.8.5",
+      "express": "^4.17.1",
+      "history": "^5.0.0",
+      "log-timestamp": "^0.3.0",
+      "mongoose": "^5.12.3",
+      "morgan": "^1.10.0",
+      "nodemon": "^2.0.7",
+      "passport": "^0.4.1",
+      "passport-jwt": "^4.0.0",
+      "prompt": "^1.1.0",
+      "prompt-sync": "^4.2.0",
+      "readline": "^1.3.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
