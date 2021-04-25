@@ -9,6 +9,8 @@ const adminUsernamePolicy = async data => {
     console.log(blackNames.includes(firstName.toUpperCase()))
     
     let error = [];
+    authError.AUTH16.type = 'email';
+    console.log(authError)
     if (blackNames.includes(firstName.toUpperCase())) error.push(constructErrorObject(authError.AUTH16, firstName))
     if (blackNames.includes(lastName.toUpperCase())) error.push(constructErrorObject(authError.AUTH16, lastName))
     if (isValidPasswordAccrossEmail(data, blackNames)) error.push(constructErrorObject(authError.AUTH16, email))

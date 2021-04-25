@@ -62,7 +62,7 @@ export const login = ({email, password}) => (dispatch) => {
 };
 
 // REGISTER USER
-export const register = ({ firstName,lastName, password, email, mobile }) => (dispatch) => {
+export const register = ({ firstName,lastName, password, email }) => (dispatch) => {
   dispatch({ type: AUTH_INIT });
   // Headers
   const config = {
@@ -72,7 +72,7 @@ export const register = ({ firstName,lastName, password, email, mobile }) => (di
   };
   
   // Request Body
-  const body = JSON.stringify({ firstName,lastName, email, password, mobile, });
+  const body = JSON.stringify({ email, password, firstName,lastName });
 
   api
     .post('/admin/auth/register', body, config)
@@ -105,7 +105,7 @@ export const resetPassword = ({email}) => (dispatch) => {
   const body = JSON.stringify({ email });
 
   api
-    .post('/auth/reset', body, config)
+    .post('/admin/auth/reset', body, config)
     .then((res) => {
       dispatch({
         type: RESET_PASSWORD,
@@ -133,9 +133,9 @@ export const changePassword = ({newpassword, resetLink}) => (dispatch) => {
     },
   };
   // Request Body
-  const body = JSON.stringify({ newpassword, resetLink });
+  const body = JSON.stringify({ token: resetLink, password: newpassword });
   api
-    .put('/auth/reset', body, config)
+    .put('/admin/auth/reset', body, config)
     .then((res) => {
       dispatch({
         type: CHANGE_PASSWORD,

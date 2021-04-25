@@ -2,6 +2,7 @@ import React, {lazy} from 'react';
 import LoginPage from '../Pages/Auth/Login/LoginPage';
 import RegisterPage from '../Pages/Auth/Register/RegisterPage';
 import RequestPassword from '../Pages/Auth/ResetPassword/RequestPassword';
+import ResetPassword from '../Pages/Auth/ResetPassword/ResetPassword';
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: '/auth/reset',
     exact: true,
     component: () => <RequestPassword />
+  },
+  {
+    path: '/auth/reset/:token',
+    exact: true,
+    component: () => <ResetPassword />
   }
 ];
 

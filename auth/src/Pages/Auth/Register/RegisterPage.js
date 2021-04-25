@@ -192,7 +192,7 @@ export class RegisterPage extends Component {
                                 labelPlacement="right"/>
                         </Grid>
                         <Grid item xs={6}>
-                            <Button className="loginButton" variant="contained" onClick={this.handleRegister}>Register</Button>                        
+                            <Button className="loginButton" variant="contained" onClick={this.handleRegister} disabled={this.props.authLoading ? true : false}>{this.props.authLoading ? 'Loading' : 'Register'}</Button>                        
                         </Grid>
                     </Grid>
                 </form>

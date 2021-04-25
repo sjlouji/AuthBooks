@@ -34,7 +34,8 @@ import {
           user: action.payload,
         };
       case LOGIN_SUCCESS:
-        localStorage.setItem('token', action.payload.Token);
+        console.log(action.payload.token)
+        localStorage.setItem('token', action.payload.token);
         return {
           ...state,
           user: action.payload,

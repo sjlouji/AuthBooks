@@ -10,6 +10,7 @@ import { withRouter } from 'react-router-dom';
 import { login } from '../../../Store/Action/auth'
 import { connect } from 'react-redux';
 import {Alert} from 'react-bootstrap';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import './Login.css';
 
 const styles = theme => ({
@@ -136,7 +137,7 @@ export class LoginPage extends Component {
                             <Button className="forgotButton" onClick={()=>this.navigate('/auth/reset')} color="primary">Forgot Password</Button>                        
                         </Grid>
                         <Grid item xs={6}>
-                            <Button className="loginButton" variant="contained" onClick={this.handleLogin}>Login</Button>                        
+                            <Button className="loginButton" variant="contained" onClick={this.handleLogin} disabled={this.props.authLoading ? true : false}>{this.props.authLoading ? 'Loading' : 'Login'}</Button>                        
                         </Grid>
                     </Grid>
                 </form>

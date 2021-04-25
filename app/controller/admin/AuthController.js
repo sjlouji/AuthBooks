@@ -176,6 +176,7 @@ class AuthController {
         if(verifyJwt && verifyJwt.status === httpResponse.HTTP_UNAUTHORIZED) {
             console.log(`[Passport ResetPassword Error]: ${JSON.stringify(verifyJwt)}`);
             error.push(authError.AUTH19)
+            console.log(`[Passport ResetPassword Error]: ${JSON.stringify(error)}`);
             return res.status(httpResponse.HTTP_BAD_REQUEST).json({'error': error})
         }
         // Retrive user information
