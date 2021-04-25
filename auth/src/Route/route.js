@@ -3,6 +3,7 @@ import LoginPage from '../Pages/Auth/Login/LoginPage';
 import RegisterPage from '../Pages/Auth/Register/RegisterPage';
 import RequestPassword from '../Pages/Auth/ResetPassword/RequestPassword';
 import ResetPassword from '../Pages/Auth/ResetPassword/ResetPassword';
+import HomePage from '../Pages/Dashboard/Home';
 
 const routes = [
   {
@@ -24,7 +25,19 @@ const routes = [
     path: '/auth/reset/:token',
     exact: true,
     component: () => <ResetPassword />
-  }
+  },
+  {
+    route: '*',
+    component: HomePage,
+    exact: true,
+    routes: [
+        {
+          path: '/',
+          exact: true,
+          component: lazy(() => import('../Pages/Dashboard/Index/Dashboard'))
+        },
+    ]
+  },
 ];
 
 export default routes;

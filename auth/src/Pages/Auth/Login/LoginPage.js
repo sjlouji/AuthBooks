@@ -101,6 +101,9 @@ export class LoginPage extends Component {
     
     render() {
         const { classes } = this.props;
+        if(this.props.isAuthenticated) {
+            this.navigate('/')
+        }
         return (
             <div class="LoginBox">
                 <Typography className="headerName" component="h1" variant="h5">

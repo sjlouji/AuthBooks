@@ -7,9 +7,13 @@ import  {BrowserRouter}  from  'react-router-dom'
 import store from './Store/configureStore';
 import  routes from './Route/route.js'
 import { Provider } from 'react-redux';
+import { loadUser } from './Store/Action/auth'
 
 const history = createBrowserHistory();
 class App extends Component {
+  componentDidMount() {
+    store.dispatch(loadUser());
+  }
   render(){
     return (
       <Provider store={store}>

@@ -206,6 +206,10 @@ class AuthController {
         return res.status(httpResponse.HTTP_OK).json(constructResponse);
     }
 
+    static async passportUser(req, res, next){
+        const { user } = req;
+        return res.status(httpResponse.HTTP_OK).json({user});
+    }
 }
 
 module.exports =  AuthController;

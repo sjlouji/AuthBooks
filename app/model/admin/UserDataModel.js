@@ -17,8 +17,8 @@ class UserDataModel {
     return bcrypt.compare(Password,user.password)
   }
 
-  static verifyLoginId(user) {
-    return User.findOne({_id: user._id});
+  static async verifyLoginId(user) {
+    return await User.findOne({_id: user._id});
   }
 
   static async encodePassword(password) {
