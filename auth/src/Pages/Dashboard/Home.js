@@ -14,7 +14,7 @@ export class HomePage extends Component {
 
     render() {
         return(
-            <div className="main-wrapper loaded sidebar-folded" id="app" >
+            <div>
                 <Sidebar />
             </div>
         );
