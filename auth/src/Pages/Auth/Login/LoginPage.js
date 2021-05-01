@@ -11,6 +11,7 @@ import { login } from '../../../Store/Action/auth'
 import { connect } from 'react-redux';
 import {Alert} from 'react-bootstrap';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
 import './Login.css';
 
 const styles = theme => ({
@@ -102,7 +103,7 @@ export class LoginPage extends Component {
     render() {
         const { classes } = this.props;
         if(this.props.isAuthenticated) {
-            this.navigate('/')
+            this.props.history.goBack()
         }
         return (
             <div class="LoginBox">

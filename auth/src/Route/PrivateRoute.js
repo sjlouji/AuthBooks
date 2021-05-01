@@ -8,7 +8,7 @@ const PrivateRoute = ({component: Component, ...rest}) => {
         console.log('Not logged in')
         return (
             <Redirect to={{
-                pathname: '/login',
+                pathname: '/auth/login',
               }}/>
         )
     }

@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Sen:wght@700&display=swap");
+
+.logo-top {
+    display: flex;
+    justify-content: center;
+    background: white;
+}
+
+    
+.logo-auth {
+    font-size: 20px;
+    font-family: "Sen", sans-serif;
+    color: #1c203b;
+    
+  }
+
+.logo-pink {
+    height: 7px;
+    width: 7px;
+    background: #df3e55;
+    border-radius: 100%;
+    animation-name: bounce-7;
+    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
+    animation-duration: 2s;
+}
+

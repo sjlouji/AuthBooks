@@ -36,6 +36,31 @@ const routes = [
           exact: true,
           component: lazy(() => import('../Pages/Dashboard/Index/Dashboard'))
         },
+        {
+          path: '/blacklist',
+          exact: true,
+          component: lazy(() => import('../Pages/Dashboard/Index/Dashboard'))
+        },
+        {
+          path: '/permissions',
+          exact: true,
+          component: lazy(() => import('../Pages/Dashboard/Index/Dashboard'))
+        },
+        {
+          path: '/logs',
+          exact: true,
+          component: lazy(() => import('../Pages/Dashboard/Index/Dashboard'))
+        },
+        {
+          path: '/sso/users',
+          exact: true,
+          component: lazy(() => import('../Pages/Dashboard/Profile/Profile'))
+        },
+        {
+          path: '/sso/logs',
+          exact: true,
+          component: lazy(() => import('../Pages/Dashboard/Index/Dashboard'))
+        },
     ]
   },
 ];
