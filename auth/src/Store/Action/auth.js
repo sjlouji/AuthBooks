@@ -21,7 +21,7 @@ const api = axios.create({
 export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
   api
-    .get(`/auth/secret`, tokenConfig(getState))
+    .get(`/admin/auth/user`, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: USER_LOADED,

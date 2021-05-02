@@ -92,6 +92,9 @@ export class ResetPassword extends Component {
     
     render() {
         const { classes } = this.props;
+        if(this.props.isAuthenticated) {
+            this.navigate('/')
+        }
         return (
             <div class="rqbox">
                 <Typography className="headerName" component="h1" variant="h5">

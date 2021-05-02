@@ -31,14 +31,13 @@ import {
           isAuthenticated: true,
           isLoading: false,
           authLoading: false,
-          user: action.payload,
+          user: action.payload.user,
         };
       case LOGIN_SUCCESS:
-        console.log(action.payload.token)
         localStorage.setItem('token', action.payload.token);
         return {
           ...state,
-          user: action.payload,
+          user: action.payload.user,
           isAuthenticated: true,
           authLoading: false,
           isLoading: false,
@@ -47,7 +46,7 @@ import {
         localStorage.setItem('token', action.payload.Token)
         return {
           ...state,
-          user: action.payload,
+          user: action.payload.user,
           isAuthenticated: true,
           isLoading: false,
           authLoading: false
