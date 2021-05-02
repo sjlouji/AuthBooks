@@ -8,5 +8,5 @@ router.post('/login', AuthController.passportLogin);
 router.post('/register', AuthController.passportRegister);
 router.post('/reset', AuthController.passportForgotPassword);
 router.put('/reset', AuthController.passportResetPassword);
-
+router.get('/user', passport.authenticate('jwt',{ session: false }), AuthController.passportUser)
 module.exports = router;

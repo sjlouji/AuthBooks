@@ -120,6 +120,9 @@ export class RegisterPage extends Component {
     
     render() {
         const { classes } = this.props;
+        if(this.props.isAuthenticated) {
+            this.navigate('/')
+        }
         return (
             <div class="box">
                 <Typography className="headerName" component="h1" variant="h5">

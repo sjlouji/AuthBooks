@@ -97,6 +97,9 @@ export class RequestPassword extends Component {
     
     render() {
         const { classes } = this.props;
+        if(this.props.isAuthenticated) {
+            this.navigate('/')
+        }
         return (
             <div>
                 <div class="rqbox">
