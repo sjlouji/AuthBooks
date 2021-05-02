@@ -36,9 +36,11 @@ class UserDataModel {
   }
   
   static async updatePassword(password, user) {
-    console.log('password',)
-    console.log(user)
     return await User.findOneAndUpdate({_id: user._id}, {password: password}, {upsert: true})
+  }
+
+  static async getUsers() {
+    return await User.find({}).lean();
   }
 }
 module.exports = UserDataModel;

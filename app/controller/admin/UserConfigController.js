@@ -8,8 +8,9 @@ class UserConfigController {
         const error = [];
         const user = req.user;
         // Check if Config Exists
-        const findClientConfigById = UserConfigDataModel.findClientConfigById(user);
-        if (findClientConfigById.length === 0) {
+        const findClientConfigById = await UserConfigDataModel.findClientConfigById(user);
+        console.log(findClientConfigById)
+        if (findClientConfigById) {
             console.log(`[Default Admin Config Insert Error]: ${JSON.stringify(findClientConfigById)}`)
             error.push(configError.CONF03)
             return res.status(httpResponse.HTTP_BAD_REQUEST).json(UserConfigHelper.constructErrorResponse(error, null, httpResponse.HTTP_BAD_REQUEST))

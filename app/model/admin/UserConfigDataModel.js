@@ -16,6 +16,13 @@ class UserConfigDataModel {
         return permissions;
     }
 
+    static async getUserlistPermission(user) {
+        const id = user._id;
+        const getUserId = await UserConfig.findOne({user_id: ObjectId(id)});
+        const permissions = getUserId.userListConfig;
+        return permissions;
+    }
+
     static async updateUserConfig(configType, data, user, config) {
         return UserConfig.findOneAndUpdate(
             {_id: config._id},
@@ -48,6 +55,14 @@ class UserConfigDataModel {
                         user_id: user._id,
                         updated_by: user._id
                     },
+                    userListConfig: {
+                        can_view: true, 
+                        can_edit: false,
+                        can_delete: false, 
+                        can_add: false,
+                        user_id: user._id,
+                        updated_by: user._id
+                    },
                     user_id: user._id,
                     updated_by: user._id
                 }
@@ -69,6 +84,14 @@ class UserConfigDataModel {
                         updated_by: user._id
                     },
                     userConfig: {
+                        can_view: true, 
+                        can_edit: true,
+                        can_delete: true, 
+                        can_add: true,
+                        user_id: user._id,
+                        updated_by: user._id
+                    },
+                    userListConfig: {
                         can_view: true, 
                         can_edit: true,
                         can_delete: true, 
