@@ -34,32 +34,32 @@ const routes = [
         {
           path: '/',
           exact: true,
-          component: lazy(() => import('../Pages/Dashboard/Index/Dashboard'))
+          component: lazy(() => import('../Pages/Dashboard/Users/Users'))
         },
         {
           path: '/blacklist',
           exact: true,
-          component: lazy(() => import('../Pages/Dashboard/Index/Dashboard'))
+          component: lazy(() => import('../Pages/Dashboard/Blacklist/Blacklist'))
         },
         {
           path: '/permissions',
           exact: true,
-          component: lazy(() => import('../Pages/Dashboard/Index/Dashboard'))
+          component: lazy(() => import('../Pages/Dashboard/Permissions/Permissions'))
         },
         {
           path: '/logs',
           exact: true,
-          component: lazy(() => import('../Pages/Dashboard/Index/Dashboard'))
+          component: lazy(() => import('../Pages/Dashboard/Logs/Logs'))
         },
         {
           path: '/sso/users',
           exact: true,
-          component: lazy(() => import('../Pages/Dashboard/Profile/Profile'))
+          component: lazy(() => import('../Pages/Dashboard/SSO/Users/SSOUsers'))
         },
         {
           path: '/sso/logs',
           exact: true,
-          component: lazy(() => import('../Pages/Dashboard/Index/Dashboard'))
+          component: lazy(() => import('../Pages/Dashboard/SSO/Logs/SSOLogs'))
         },
     ]
   },

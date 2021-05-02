@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 
-export class DashboardPage extends Component {
+export class LogsPage extends Component {
 
     render() {
         return(
             <div>
-                DashboardPage
+                LogsPage
             </div>
         );
     }
 }
 
-export default DashboardPage
+export default LogsPage

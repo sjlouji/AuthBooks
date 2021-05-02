@@ -6,6 +6,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { withStyles } from '@material-ui/core/styles';
 import {withRouter} from 'react-router'
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 const drawerWidth = 240;
 
@@ -50,9 +51,21 @@ const useStyles = ((theme) => ({
 export class Sidebar extends Component {
     // PROPS
     // 1. item - Array of Objects
+    // SAMPLE DATA
     // const sidebarItem = [
-    //    { id: 'name_to_display', icon: icon_component ,to: to_which_page, isActive: true || false},
-    // ];
+    //       {
+    //         id: 'title_name',
+    //         data: [
+    //           { id: 'name', icon: <icon /> ,to: 'route', isActive: false },
+    //       ]
+    //     },
+    //     {
+    //         id: 'title_name',
+    //         data: [
+    //           { id: 'name', icon: <icon /> ,to: 'route', isActive: false},
+    //       ]              
+    //     }
+    //   ];
 
     // Handle Navigation
     handleNav(data) {
@@ -60,20 +73,26 @@ export class Sidebar extends Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, item } = this.props;
         return(
             <Drawer className={classes.drawer} variant="permanent" classes={{ paper: classes.drawerPaper }}>
                 <div style={{ marginTop: '70px' }}>
-                    <List>
-                        {this.props.item.map((data)=> {
-                            return (
-                                <ListItem button key={data.id} className={data.isActive ? classes.isActive : classes.listItem} onClick={() => this.handleNav(data.to)}>
-                                    <ListItemIcon className={data.isActive ? classes.itemColor : ''}>{data.icon}</ListItemIcon>
-                                    <ListItemText primary={data.id} disableTypography className={data.isActive ? classes.itemTextIsActive : classes.itemText}/>
-                                </ListItem>
-                            )
-                        })}
-                    </List>
+                    {item.map((el) => {
+                        return (
+                            <List subheader={<ListSubheader>{el.id}</ListSubheader>}>
+                                {
+                                    el.data.map((val) => {
+                                        return (
+                                            <ListItem button key={val.id} className={val.isActive ? classes.isActive : classes.listItem} onClick={() => this.handleNav(val.to)}>
+                                                <ListItemIcon className={val.isActive ? classes.itemColor : ''}>{val.icon}</ListItemIcon>
+                                                <ListItemText primary={val.id} disableTypography className={val.isActive ? classes.itemTextIsActive : classes.itemText}/>
+                                            </ListItem>
+                                        )
+                                    })
+                                }
+                            </List>
+                        )
+                    })}
                 </div>
             </Drawer>
         );

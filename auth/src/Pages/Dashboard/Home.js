@@ -22,13 +22,23 @@ export class HomePage extends Component {
     // State
     state = {
         sidebarItem: [
-            { id: 'Users', icon: <PeopleOutlineIcon /> ,to: '/', isActive: true },
-            { id: 'Black List', icon: <BlockIcon /> ,to: '/blacklist', isActive: false},
-            { id: 'Permissions', icon: <VerifiedUserIcon /> ,to: '/permissions', isActive: false},
-            { id: 'Activity Monitoring', icon: <InboxIcon /> ,to: '/logs', isActive: false},
-            { id: 'SSO Users', icon: <SupervisedUserCircleIcon /> ,to: '/sso/users', isActive: false},
-            { id: 'SSO User Activity', icon: <LocalActivityIcon /> ,to: '/sso/logs', isActive: false},
-          ],
+          {
+              id: 'AuthBooks',
+              data: [
+                { id: 'Users', icon: <PeopleOutlineIcon /> ,to: '/', isActive: true },
+                { id: 'Black List', icon: <BlockIcon /> ,to: '/blacklist', isActive: false},
+                { id: 'Permissions', icon: <VerifiedUserIcon /> ,to: '/permissions', isActive: false},
+                { id: 'Activity Monitoring', icon: <InboxIcon /> ,to: '/logs', isActive: false},
+            ]
+          },
+          {
+              id: 'SSO',
+              data: [
+                { id: 'SSO Users', icon: <SupervisedUserCircleIcon /> ,to: '/sso/users', isActive: false},
+                { id: 'SSO User Activity', icon: <LocalActivityIcon /> ,to: '/sso/logs', isActive: false},
+            ]              
+          }
+        ],
     }
 
     // Excecuted when component recieves new props
@@ -44,8 +54,11 @@ export class HomePage extends Component {
     // Updates the drawer state
     setDrawerState(props) {
         this.setState({ sidebarItem:  this.state.sidebarItem.map((el, index)=> {
-            if (props.location.pathname === el.to) el.isActive = true
-            else el.isActive = false
+            el.data.map((val) => {
+                if (props.location.pathname === val.to) val.isActive = true
+                else val.isActive = false
+                return val;
+            })
             return el;
         })})
     }
