@@ -4,6 +4,7 @@ import RegisterPage from '../Pages/Auth/Register/RegisterPage';
 import RequestPassword from '../Pages/Auth/ResetPassword/RequestPassword';
 import ResetPassword from '../Pages/Auth/ResetPassword/ResetPassword';
 import HomePage from '../Pages/Dashboard/Home';
+import Logout from '../Pages/Dashboard/Logout';
 
 const routes = [
   {
@@ -60,6 +61,11 @@ const routes = [
           path: '/sso/logs',
           exact: true,
           component: lazy(() => import('../Pages/Dashboard/SSO/Logs/SSOLogs'))
+        },
+        {
+          path: '/profile',
+          exact: true,
+          component: lazy(() => import('../Pages/Dashboard/Profile/Profile'))
         },
     ]
   },

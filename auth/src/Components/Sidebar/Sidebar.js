@@ -7,6 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { withStyles } from '@material-ui/core/styles';
 import {withRouter} from 'react-router'
 import ListSubheader from '@material-ui/core/ListSubheader';
+import { Divider } from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -83,10 +84,12 @@ export class Sidebar extends Component {
                                 {
                                     el.data.map((val) => {
                                         return (
-                                            <ListItem button key={val.id} className={val.isActive ? classes.isActive : classes.listItem} onClick={() => this.handleNav(val.to)}>
-                                                <ListItemIcon className={val.isActive ? classes.itemColor : ''}>{val.icon}</ListItemIcon>
-                                                <ListItemText primary={val.id} disableTypography className={val.isActive ? classes.itemTextIsActive : classes.itemText}/>
-                                            </ListItem>
+                                            <div>
+                                                <ListItem button key={val.id} className={val.isActive ? classes.isActive : classes.listItem} onClick={() => this.handleNav(val.to)}>
+                                                    <ListItemIcon className={val.isActive ? classes.itemColor : ''}>{val.icon}</ListItemIcon>
+                                                    <ListItemText primary={val.id} disableTypography className={val.isActive ? classes.itemTextIsActive : classes.itemText}/>
+                                                </ListItem>
+                                            </div>
                                         )
                                     })
                                 }

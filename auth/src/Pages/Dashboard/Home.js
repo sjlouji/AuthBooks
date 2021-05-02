@@ -1,11 +1,8 @@
 import React, { Component,Suspense } from 'react';
 import { connect } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
-import AppsIcon from '@material-ui/icons/Apps';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
 import {withRouter} from 'react-router'
 import { logout } from '../../Store/Action/auth'
-import  PrivateRoute  from '../../Route/PrivateRoute';
 import { createBrowserHistory } from 'history';
 import Sidebar from '../../Components/Sidebar/Sidebar'
 import Appbar from '../../Components/Appbar/Appbar'
@@ -15,7 +12,8 @@ import BlockIcon from '@material-ui/icons/Block';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import LocalActivityIcon from '@material-ui/icons/LocalActivity';
-import Typography from '@material-ui/core/Typography';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const history = createBrowserHistory();
 export class HomePage extends Component {
@@ -39,17 +37,25 @@ export class HomePage extends Component {
             ]              
           }
         ],
+        appbarMenu: [
+            { id: 'My Account', icon: <SupervisorAccountIcon style={{ fontSize: '20px' }}/> ,to: '/profile' },
+            { id: 'Logout', icon: <ExitToAppIcon style={{ fontSize: '20px' }}/> ,to: '/', },
+        ],
+        user: null,
     }
 
     // Excecuted when component recieves new props
     componentWillReceiveProps(nextProps) {
+        this.checkAuth();   
         this.setDrawerState(nextProps)
+        this.updateUser(nextProps);
     }
 
     // Excecuted when the component loads first time
     componentDidMount() {
-        this.setDrawerState(this.props); 
         this.checkAuth();   
+        this.updateUser(this.props);
+        this.setDrawerState(this.props); 
     }
 
     // Redirect to login page
@@ -71,15 +77,34 @@ export class HomePage extends Component {
         })})
     }
 
+    // Update User Data
+    updateUser(props) {
+        if(props) {
+            this.setState({
+                user: props.user || null,
+            })
+        }
+    }
+
+    // Handle Logout
+    handleLogout() {
+        this.props.logout()
+    }
+
     render() {
+        this.checkAuth()
         return(
             <div>
                 {/* Appbar */}
                 <Appbar
-                    username={this.props.user ? this.props.user.firstName : ''}
+                    username={this.state.user ? this.state.user.firstName : ''}
+                    email={this.state.user ? this.state.user.email : ''}
+                    item={this.state.appbarMenu}
+                    logout={() => this.handleLogout()}
                 />
                 {/* Sidebar */}
-                <Sidebar item={this.state.sidebarItem}/>
+                <Sidebar 
+                    item={this.state.sidebarItem} />
                 {/* Content */}
                 <main style={{ padding: '100px', marginLeft: '170px'}}>
                     <Suspense fallback='Loading'>
