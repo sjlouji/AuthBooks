@@ -23,19 +23,19 @@ export class HomePage extends Component {
     state = {
         sidebarItem: [
           {
-              id: 'AuthBooks',
+              id: 'Auth',
               data: [
-                { id: 'Users', icon: <PeopleOutlineIcon /> ,to: '/', isActive: true },
-                { id: 'Black List', icon: <BlockIcon /> ,to: '/blacklist', isActive: false},
-                { id: 'Permissions', icon: <VerifiedUserIcon /> ,to: '/permissions', isActive: false},
-                { id: 'Activity Monitoring', icon: <InboxIcon /> ,to: '/logs', isActive: false},
+                { id: 'Users', icon: <PeopleOutlineIcon style={{ fontSize: '20px' }}/> ,to: '/', isActive: true },
+                { id: 'Black List', icon: <BlockIcon style={{ fontSize: '20px' }}/> ,to: '/blacklist', isActive: false},
+                { id: 'Permissions', icon: <VerifiedUserIcon style={{ fontSize: '20px' }}/> ,to: '/permissions', isActive: false},
+                { id: 'Activity Monitoring', icon: <InboxIcon style={{ fontSize: '20px' }}/> ,to: '/logs', isActive: false},
             ]
           },
           {
-              id: 'SSO',
+              id: 'Sso',
               data: [
-                { id: 'SSO Users', icon: <SupervisedUserCircleIcon /> ,to: '/sso/users', isActive: false},
-                { id: 'SSO User Activity', icon: <LocalActivityIcon /> ,to: '/sso/logs', isActive: false},
+                { id: 'SSO Users', icon: <SupervisedUserCircleIcon style={{ fontSize: '20px' }}/> ,to: '/sso/users', isActive: false},
+                { id: 'SSO User Activity', icon: <LocalActivityIcon style={{ fontSize: '20px' }}/> ,to: '/sso/logs', isActive: false},
             ]              
           }
         ],
@@ -48,7 +48,15 @@ export class HomePage extends Component {
 
     // Excecuted when the component loads first time
     componentDidMount() {
-        this.setDrawerState(this.props);    
+        this.setDrawerState(this.props); 
+        this.checkAuth();   
+    }
+
+    // Redirect to login page
+    checkAuth(){
+        if(!this.props.isAuthenticated) {
+            this.props.history.push('/auth/login')
+        }
     }
 
     // Updates the drawer state
@@ -64,9 +72,6 @@ export class HomePage extends Component {
     }
 
     render() {
-        if(!this.props.isAuthenticated) {
-            this.props.history.push('/auth/login')
-        }
         return(
             <div>
                 {/* Appbar */}

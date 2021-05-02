@@ -79,7 +79,7 @@ export class Sidebar extends Component {
                 <div style={{ marginTop: '70px' }}>
                     {item.map((el) => {
                         return (
-                            <List subheader={<ListSubheader>{el.id}</ListSubheader>}>
+                            <List subheader={<ListSubheader style={{ fontSize: '12px'}}>{el.id}</ListSubheader>}>
                                 {
                                     el.data.map((val) => {
                                         return (
