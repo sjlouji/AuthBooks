@@ -9,91 +9,26 @@ import UserTable from '../../../Components/Table/UserTable';
 import { connect } from 'react-redux';
 import { loadUserList } from '../../../Store/Action/user'
 import Moment from 'react-moment';
-import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import Snackbar from '@material-ui/core/Snackbar';
-import { makeStyles } from '@material-ui/core/styles';
 import MuiAlert from '@material-ui/lab/Alert';
 import EditIcon from '@material-ui/icons/Edit';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 export class UsersPage extends Component {
 
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.user && nextProps.user.user){
-            this.setUserState(nextProps)
-        }
-        if(nextProps.error !== undefined){
-            if(nextProps.error.message === 'Network Error'){
-                this.setState({error: nextProps.error.message, open: true})
-            }else{
-                nextProps.error.response.data && nextProps.error.response.data.error.map((el => {
-                    this.setState({
-                        open: true,
-                        error: el.message
-                    })
-                }))
-            }
-        }
+    // Contructor
+    constructor(props) {
+        super(props)
+        this.handleClose = this.handleClose.bind(this)
     }
 
-    componentDidMount(){
-        this.fetchData()
-    }
-
-    fetchData() {
-        this.setState({
-            error: '',
-            open: false
-        })
-        this.props.loadUserList()
-    }
-    
-    setUserState(props) {
-        console.log(props)
-        this.setState({
-            row: props.user.user.map((el)=> {
-                console.log(this.getUserType(el.isSuperAdmin, el.isAdmin))
-                el.isActive = this.getActiveStatus(el.isActive)
-                el.user_type = <Chip label={this.getUserType(el.isSuperAdmin, el.isAdmin)} style={this.getColorChip(el.isSuperAdmin, el.isAdmin)} size='small'></Chip>
-                el.createdAt = <Moment format="llll">{el.createdAt}</Moment>
-                el.actions = <div>
-                            <EditIcon onClick={()=> console.log('hello')} style={{ cursor: 'pointer', color: 'white', background: '#5f6368', fontSize: '25px', borderRadius: '50px', margin: '5px' }}/>
-                            <ArrowRightIcon onClick={()=> console.log('hello')} style={{ cursor: 'pointer', color: 'white', background: '#5f6368', fontSize: '25px', borderRadius: '50px', margin: '5px' }}/>
-                        </div>
-                return el;
-            })
-        })
-    }
-
-    getActiveStatus(isActive) {
-        if(isActive) return 'Yes';
-        return 'No'
-    }
-
-    getColorChip(superAdmin, admin) {
-        if(superAdmin) {
-            return {background: '#2e6da0', color: 'white'}
-        }
-        else if(admin) {
-            return {background: '#ce0045', color: 'white'}
-        }
-        else return {}        
-    }
-
-    getUserType(superAdmin, admin) {
-        if(superAdmin) {
-            return 'Super Admin'
-        }
-        else if(admin) {
-            return 'Admin'
-        }
-        else return 'Member'
-    }
-
+    // Holds the state
     state = {
         column: [
             { name: "firstName", label: "Name", options: {filter: false} },
@@ -108,51 +43,133 @@ export class UsersPage extends Component {
         error: ''
     }
 
+    componentWillReceiveProps(nextProps) {
+        // Push the user data to state
+        if(nextProps.user && nextProps.user.user){
+            this.setUserState(nextProps)
+        }
+        // Handle Error
+        if(nextProps.error !== undefined){
+            // Network Error
+            if(nextProps.error.message === 'Network Error'){
+                this.setState({error: nextProps.error.message, open: true})
+            }else{
+            // Other Errors 
+                nextProps.error.response.data && nextProps.error.response.data.error.map((el => {
+                    this.setState({
+                        open: true,
+                        error: el.message
+                    })
+                }))
+            }
+        }
+    }
+
+    // Converts user data into MD table readabble format
+    setUserState(props) {
+        this.setState({
+            row: props.user.user.map((el)=> {
+                el.isActive = this.getActiveStatus(el.isActive)
+                el.user_type = <Chip label={this.getUserType(el.isSuperAdmin, el.isAdmin)} style={this.getColorChip(el.isSuperAdmin, el.isAdmin)} size='small'></Chip>
+                el.createdAt = <Moment format="llll">{el.createdAt}</Moment>
+                el.actions = <div>
+                            <EditIcon onClick={()=> console.log('hello')} style={{ cursor: 'pointer', color: 'white', background: '#5f6368', fontSize: '25px', borderRadius: '50px', margin: '5px' }}/>
+                            <ArrowRightIcon onClick={()=> console.log('hello')} style={{ cursor: 'pointer', color: 'white', background: '#5f6368', fontSize: '25px', borderRadius: '50px', margin: '5px' }}/>
+                        </div>
+                return el;
+            })
+        })
+    }
+
+    // Get IsActive Status. IsActive ? Yes : No
+    getActiveStatus(isActive) {
+        if(isActive) return 'Yes';
+        return 'No'
+    }
+
+    // Get the color for the chip
+    getColorChip(superAdmin, admin) {
+        if(superAdmin) {
+            return {background: '#2e6da0', color: 'white'}
+        }
+        else if(admin) {
+            return {background: '#ce0045', color: 'white'}
+        }
+        else return {}        
+    }
+
+    // Get the user type
+    getUserType(superAdmin, admin) {
+        if(superAdmin) {
+            return 'Super Admin'
+        }
+        else if(admin) {
+            return 'Admin'
+        }
+        else return 'Member'
+    }
+
+    // Trigers on component mount
+    componentDidMount(){
+        this.fetchData()
+    }
+
+    //  Fetch user list and set default error response as empty
+    fetchData() {
+        this.setState({
+            error: '',
+            open: false
+        })
+        this.props.loadUserList()
+    }
+
     // Handle Navigation
     handleNav(data) {
         this.props.history.push(data)
     }
 
+    // Handle Snackbar open and close
     handleClose() {
         this.setState({
             open: !this.state.open,
         })
     }
 
-    constructor(props) {
-        super(props)
-        this.handleClose = this.handleClose.bind(this)
-    }
-
     render() {
-        console.log(this.props.error)
         return(
             <div>
                 {/* Page Name */}
-                <Grid container direction="row" alignItems="center">
-                    <Grid item>
-                        <PeopleAltIcon  style={{ color: '#5f6368', fontSize: '20px' }}/>
+                <Grid container direction="row">
+                    <Grid xs={6}>
+                        <Grid container direction="row" alignItems="center">
+                            <Grid item>
+                                <PeopleAltIcon  style={{ color: '#5f6368', fontSize: '20px' }}/>
+                            </Grid>
+                            <Grid item style={{ marginLeft: '5px' }}>
+                                <Typography style={{ fontFamily: 'Roboto,RobotoDraft,Helvetica,Arial,sans-serif', fontSize: '15px', fontWeight: '500', color: '#5f6368' }}>Users</Typography>
+                            </Grid>
+                        </Grid>
+                        {/* Breadcrumbs */}
+                        <Breadcrumbs aria-label="breadcrumb" style={{ fontSize: '13px' }}>
+                            <Link color="inherit" style={{ cursor: 'pointer' }} onClick={() => this.handleNav('/')}>
+                                Users
+                            </Link>
+                            <Typography style={{ fontSize: '13px' }} color="textPrimary">List Users</Typography>
+                        </Breadcrumbs>
                     </Grid>
-                    <Grid item style={{ marginLeft: '5px' }}>
-                        <Typography style={{ fontFamily: 'Roboto,RobotoDraft,Helvetica,Arial,sans-serif', fontSize: '15px', fontWeight: '500', color: '#5f6368' }}>Users</Typography>
+                    <Grid xs={6}>
+                        <Button variant="contained" size="medium" color="primary" style={{ float: 'right' }} startIcon={<AddIcon />}>
+                            Add User
+                        </Button>
                     </Grid>
                 </Grid>
-                {/* Breadcrumbs */}
-                <Breadcrumbs aria-label="breadcrumb" style={{ fontSize: '13px' }}>
-                    <Link color="inherit" style={{ cursor: 'pointer' }} onClick={() => this.handleNav('/')}>
-                        Home
-                    </Link>
-                    <Link color="inherit" style={{ cursor: 'pointer' }} onClick={() => this.handleNav('/')}>
-                        Users
-                    </Link>
-                    <Typography style={{ fontSize: '13px' }} color="textPrimary">List Users</Typography>
-                </Breadcrumbs>
                 {/* Table */}
                 <UserTable 
                     style={{ padding: '50px' }}
                     tabName = "Users"
                     columns={this.state.column}
                     row={this.state.row}/>
+                {/* Error Snack bar */}
                 <Snackbar open={this.state.open} autoHideDuration={6000} onClose={this.handleClose}>
                     <Alert onClose={this.handleClose} severity="error">
                         {this.state.error}
